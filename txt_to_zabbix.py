@@ -21,7 +21,7 @@ filename = str(sys.argv[1])
 f = open(filename)
 f_input = f.read().split('\n') 
 f.close()
-del f_input[0] #remove 1st string from file.
+del f_input[0] #remove 1st string from file. Comment it, if you want to use first string (without description)
 
 s = requests.Session()
 
