@@ -7,21 +7,16 @@ from sys import argv
 import requests
 import json
 
-
-
 srv_group = '7' #required parameter
 srv_templ_id = '10278'  #required parameter template ID  (in my case - Hepervisors)
-
 create_enabled = 'false' # adding hosts disabled or enabled
-
 zabbix_username = 'zabbix_username'
 zabbix_password = 'zabbix_password'
 zabbix_url = 'http://zabbix_server_ip/api_jsonrpc.php'  
+headers = {'content-type': 'application/json'}  #leave as-is
 
-headers = {'content-type': 'application/json'}
 
-
-filename = str(sys.argv[1])
+filename = str(sys.argv[1])  
 
 f = open(filename)
 f_input = f.read().split('\n') 
@@ -94,7 +89,7 @@ for i in f_input:
     
     result = r_create.json()['result']
     host_ids = result['hostids'][0]
-    print('Создан хост с ID: ', host_ids)  #creation result
+    print('Host created with ID: ', host_ids)  #creation result
 
     # enable or disable created hosts after creation
     if create_enabled == 'true':
@@ -103,7 +98,7 @@ for i in f_input:
     elif create_enabled == 'false':
         create_status = '1'
     else:
-        print('Ошибка')
+        print('Error')
         sys.exit()
 
     upayload = {"jsonrpc": "2.0","method": "host.update","params": {"hostid": host_ids,"status": create_status},"auth": auth_key,"id": 1}
