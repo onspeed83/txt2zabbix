@@ -1,2 +1,1 @@
-# txt2zabbix
- add hosts from text file to zabbix server 
+Simple script which adding several hosts from text file to zabbix server via zabbix api
